@@ -1,13 +1,6 @@
 import { createStore } from 'redux';
+import rootReducer from './reducers'
 
-function reducer() {
-  return {
-    name: 'Cadu',
-    lastname: 'Eduardo'
-  }
-}
-
-const store = createStore(reducer);
-
+const store = createStore(rootReducer);
 
 export default store;
