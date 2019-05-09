@@ -1,16 +1,28 @@
 import React from 'react';
+import { isSignedIn } from "./services/auth";
+import { createRootNavigator } from './routes';
+import { createAppContainer } from 'react-navigation';
 
-import '~/config/ReactotronConfig';
+export default class App extends React.Component {
+  state = {
+    signed: false,
+    signLoaded: false,
+  };
 
-import { Provider } from 'react-redux';
-import store from './store';
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signed: res, signLoaded: true }))
+      .catch(err => alert("Erro"));
+  }
 
-import Routes from '~/routes';
+  render() {
+    const { signLoaded, signed } = this.state;
 
-const App = () => ( 
-  <Provider store={store}>
-    <Routes />
-  </Provider>
-);
+    if (!signLoaded) {
+      return null;
+    }
 
-export default App;
+    const Layout = createAppContainer(createRootNavigator(signed));
+    return <Layout />;
+  }
+}

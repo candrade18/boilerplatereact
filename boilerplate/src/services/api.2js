@@ -1,0 +1,29 @@
+import Axios from 'axios';
+
+
+  const API_URL = "http://nossaforcaapi-hml.azurewebsites.net"
+  const Client = 'client_id=00000&grant_type=password'
+
+  
+  
+  const Api = {
+    LoginUser: (user) => new Promise((resolve, reject) => {
+      let data = `${Client}&username=${user.cpf}&password=${user.senha}`
+      Axios
+          .post(`${API_URL}/token`, data)
+          .then(
+              (resp) => {
+                  console.log(resp)
+                  resolve(resp)
+              },
+              (error) => {
+                  reject(error.response)
+              }
+          )
+    }), 
+  };
+  
+  
+  
+export default Api;
+  
