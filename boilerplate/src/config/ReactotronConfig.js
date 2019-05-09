@@ -1,11 +1,6 @@
 import Reactotron, { networking, openInEditor  } from 'reactotron-react-native';
-import { reactotronRedux } from 'reactotron-redux';
-import sagaPlugin from 'reactotron-redux-saga';
 
-if (__DEV__) {
-  const tron = Reactotron.configure({ host: '10.17.10.162' })
-    .use(reactotronRedux())
-    .use(sagaPlugin())
+  const tron = Reactotron.configure()
     .use(networking())
     .use(openInEditor()) 
     .connect();
@@ -13,4 +8,4 @@ if (__DEV__) {
   tron.clear();
 
   console.tron = tron;
-}
+
